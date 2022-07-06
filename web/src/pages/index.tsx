@@ -13,9 +13,11 @@ export default function Home() {
       </Head>
 
       <div className={styles.container}>
-        <h1>Corelab</h1>
+        
 
         <div className={styles.login}>
+          <h1>Corelab Web</h1>
+
           <form>
             <Input
               placeholder="Digite seu e-mail"
@@ -33,8 +35,9 @@ export default function Home() {
             >
               Acessar
             </Button>
-
           </form>
+
+          <a>Não tem conta? <span>Cadastre-se</span></a>
         </div>
       </div>
     </>
