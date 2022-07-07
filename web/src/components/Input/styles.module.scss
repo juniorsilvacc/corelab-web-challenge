@@ -1,21 +1,21 @@
 .input{
-  border: 1px solid #ccc;
-  background-color: #FAFAFA;
+  border: 1px solid var(--border-input);
+  background-color: var(--background-input);
   font-size: .9rem;
   border-radius: .2rem;
-  color: #000;
+  color: var(--black);
   padding: .6rem;
   margin-bottom: 1rem;
 }
 
-@media(max-width: 620px) {
+@media(max-width: 700px) {
   .input {
     border: none;
     display: block;
     font-size: 1rem;
     padding: 0.8rem;
     border-radius: 0.4rem;
-    background-color: #eee;
+    background-color: var(--background-input-mob);
     margin-bottom: 1rem;
   }
 }

@@ -43,7 +43,6 @@ export function signOut() {
     destroyCookie(undefined, '@corelab.token')
 
     toast.success('Usuário desconectado')
-
     Router.push('/')
   } catch (error) {
     console.log("Error")

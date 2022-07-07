@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { FormEvent, useContext } from 'react'
 import styles from './styles.module.scss'
 import Link from 'next/link'
 import { BiSearchAlt2 } from "react-icons/bi";
@@ -7,7 +7,12 @@ import { FiLogOut } from 'react-icons/fi';
 import {AuthContext} from '../../contexts/AuthContext'
 
 export default function Header() {
-  const {signOut} = useContext(AuthContext)
+  const { signOut, isAuthenticated } = useContext(AuthContext)
+  
+  function handleClick() {
+    signOut()
+    // location.reload();
+  }
   
   return (
     <header className={styles.container}>
@@ -20,19 +25,35 @@ export default function Header() {
           </button>
         </form>
 
-        <nav>
-          <Link href="/signin">
-            Entrar
-          </Link>
+        {isAuthenticated ? (
+          <>
+            <nav>
+              <Link href="/vehicles">
+                Home
+              </Link>
 
-          <Link href="/signup">
-            Cadastrar
-          </Link>
+              <Link href="/vehicle">
+                Cadastrar Veículo
+              </Link>
 
-          <button onClick={signOut}>
-            <FiLogOut/>
-          </button>
-        </nav>
+              <button onClick={handleClick}>
+                <FiLogOut/>
+              </button>
+            </nav>
+          </>
+        ) : (
+          <>
+            <nav>
+              <Link href="/signin">
+                Entrar
+              </Link>
+
+              <Link href="/signup">
+                Cadastrar
+              </Link>
+            </nav>
+          </>
+        )}
       </div>
     </header>
   )
