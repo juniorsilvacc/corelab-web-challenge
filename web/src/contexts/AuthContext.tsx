@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode, useEffect, useState } from 'react'
 import { destroyCookie, setCookie, parseCookies } from 'nookies'
 import Router from 'next/router'
 
@@ -41,6 +41,9 @@ export const AuthContext = createContext({} as AuthContextData)
 export function signOut() {
   try {
     destroyCookie(undefined, '@corelab.token')
+
+    toast.success('Usuário desconectado')
+
     Router.push('/')
   } catch (error) {
     console.log("Error")
@@ -51,6 +54,23 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const [user, setUser] = useState<UserProps>();
   const isAuthenticated = !!user;
+
+  // Permanecendo Login
+  useEffect(() => {
+    const { "@corelab.token": token } = parseCookies();
+
+    if (token) {
+      api.get('/api/users/details').then((response) => {
+        const { id, name, email } = response.data
+
+        setUser({
+          id, name, email
+        })
+      }).catch(() => {
+        signOut()
+      })
+    }
+  }, [])
   
   // Função login
   async function signIn({email, password}: SignInProps) {

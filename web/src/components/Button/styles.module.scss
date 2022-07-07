@@ -1,6 +1,6 @@
 .button{
   max-width: 600px;
-  background-color: #2C3357;
+  background: linear-gradient(135deg, #8844ee, #b07dfb);
   padding: .6rem;
   border: 0;
   border-radius: .2rem;
@@ -15,7 +15,7 @@
   }
 
   &:hover{
-    filter: brightness(1.25);
+    filter: brightness(1.05);
   }
 }
 

@@ -10,10 +10,13 @@
 }
 
 :root {
-  --white: #FFF;
-  --black: #000;
+  --purple: #8844EE;
+  --purple-light: #B07DFB;
+  --white: #FFFFFF;
+  --black: #000000;
   --background: #F7F7F7;
   --gray: #D2D2D2;
+  --typography: #333333;
 }
 
 button {
@@ -26,7 +29,7 @@ a {
 }
 
 body {
-  background-color: var(--background)
+  background-color: var(--white)
 }
 
 body,
