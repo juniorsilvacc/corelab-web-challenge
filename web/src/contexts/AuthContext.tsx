@@ -1,6 +1,8 @@
 import { createContext, ReactNode, useState } from 'react'
-import { destroyCookie } from 'nookies'
+import { destroyCookie, setCookie, parseCookies } from 'nookies'
 import Router from 'next/router'
+
+import {api} from '../services/api'
 
 type AuthContextData = {
   user: UserProps | undefined;
@@ -26,6 +28,7 @@ type AuthProviderProps = {
 
 export const AuthContext = createContext({} as AuthContextData)
 
+// Função logout
 export function signOut() {
   try {
     destroyCookie(undefined, '@corelab.token')
@@ -40,8 +43,35 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserProps>();
   const isAuthenticated = !!user;
   
+  // Função login
   async function signIn({email, password}: SignInProps) {
-    alert('Login')
+    try {
+
+      const response = await api.post('/api/users/login', {
+        email, password
+      })
+
+      const { id, name, token } = response.data;
+      
+      setCookie(undefined, '@corelab.token', token, {
+        maxAge: 60 * 60 * 24 * 30,
+        path: "/"
+      })
+
+      setUser({
+        id,
+        name,
+        email,
+      })
+
+      // Passar para novas requisições o token
+      api.defaults.headers['Authorization'] = `Bearer ${token}`;
+
+      Router.push("/vehicles")
+      
+    } catch (error) {
+      console.log('Error')
+    }
   }
 
   return (
@@ -50,3 +80,4 @@ export function AuthProvider({ children }: AuthProviderProps) {
     </AuthContext.Provider>
   )
 }
+
