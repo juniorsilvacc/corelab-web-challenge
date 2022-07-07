@@ -1,3 +1,5 @@
+import { FormEvent, useContext, useState } from 'react'
+import { AuthContext } from '../../contexts/AuthContext'
 import Head from 'next/head'
 import styles from '../../styles/Home.module.scss'
 
@@ -8,6 +10,34 @@ import Input from '../../components/Input'
 import Link from 'next/link'
 
 export default function Signup() {
+  const { signUp } = useContext(AuthContext)
+
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const [loading, setLoading] = useState(false)
+
+  async function handleSignup(e: FormEvent) {
+    e.preventDefault()
+
+    if (name === '' || email === '' || password === '') {
+      return;
+    }
+
+    setLoading(true)
+
+    let data = {
+      name,
+      email,
+      password
+    }
+
+    await signUp(data)
+
+    setLoading(false)
+  }
+
   return (
     <>
       <Head>
@@ -20,25 +50,31 @@ export default function Signup() {
         <div className={styles.login}>
           <h1>Cadastre-se</h1>
 
-          <form>
+          <form onSubmit={handleSignup}>
             <Input
               placeholder="Digite seu nome"
-              type="password"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
 
             <Input
               placeholder="Digite seu e-mail"
               type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
 
              <Input
               placeholder="Digite sua senha"
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
             <Button
               type="submit"
-              Loading={false}
+              Loading={loading}
             >
               Cadastrar
             </Button>

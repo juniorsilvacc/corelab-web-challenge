@@ -7,3 +7,9 @@
   padding: .6rem;
   margin-bottom: 1rem;
 }
+
+@media(max-width: 620px) {
+  .input {
+    background-color: #FFFFFF;
+  }
+}
