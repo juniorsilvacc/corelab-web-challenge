@@ -1,14 +1,15 @@
+import { SSRGuest } from '../utils/SSRGuest';
 import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
 import {FormEvent, useContext, useState} from 'react';
 import {AuthContext} from '../contexts/AuthContext'
+import { toast } from 'react-toastify';
 
 // Components
 import Button from '../components/Button'
 import Input from '../components/Input'
 
 import Link from "next/link";
-
 
 export default function Home() {
   const { signIn } = useContext(AuthContext)
@@ -22,7 +23,7 @@ export default function Home() {
     e.preventDefault();
 
     if (email === '' || password === '') {
-      return;
+      return toast.warning("Preencha todos os campos")
     }
 
     setLoading(true)
@@ -78,3 +79,9 @@ export default function Home() {
     </>
   )
 }
+
+export const getServerSideProps = SSRGuest(async (ctx) => {
+  return {
+    props: {}
+  }
+})

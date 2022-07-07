@@ -1,5 +1,6 @@
 import { FormEvent, useContext, useState } from 'react'
 import { AuthContext } from '../../contexts/AuthContext'
+import { toast } from 'react-toastify';
 import Head from 'next/head'
 import styles from '../../styles/Home.module.scss'
 
@@ -22,7 +23,7 @@ export default function Signup() {
     e.preventDefault()
 
     if (name === '' || email === '' || password === '') {
-      return;
+      return toast.warning("Preencha todos os campos")
     }
 
     setLoading(true)
