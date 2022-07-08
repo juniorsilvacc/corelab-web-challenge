@@ -29,7 +29,7 @@ export default function Header() {
           <>
             <nav>
               <Link href="/vehicles">
-                Home
+                Veículos
               </Link>
 
               <Link href="/vehicle">

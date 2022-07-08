@@ -10,6 +10,7 @@ import Button from '../../components/Button';
 import Textarea from '../../components/Textarea';
 
 import {api} from '../../services/api'
+import { SSRAuth } from '../../utils/SSRAuth';
 
 export default function Vehicle() {
   const [name, setName] = useState('')
@@ -27,7 +28,7 @@ export default function Vehicle() {
     try {
 
       if (name === '' || plate === '' || color === '' || year === '' || price === '' || description === '') {
-        return toast.warning("Preencha o campo");
+        return toast.warning("Preencha todos os campos");
       }
 
       setLoading(true);
@@ -118,3 +119,9 @@ export default function Vehicle() {
     </>
   )
 }
+
+export const getServerSideProps = SSRAuth(async (ctx) => {
+  return {
+    props: {}
+  }
+})
