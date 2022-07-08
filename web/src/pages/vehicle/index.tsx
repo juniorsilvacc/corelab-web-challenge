@@ -56,7 +56,7 @@ export default function Vehicle() {
   return (
     <>
       <Head>
-        <title>Corelab - Cadastrar Veículo </title>
+        <title>Corelab - Cadastrar Veículo</title>
       </Head>
 
       <Header />

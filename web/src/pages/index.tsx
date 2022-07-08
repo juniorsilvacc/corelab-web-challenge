@@ -1,20 +1,23 @@
 import Head from 'next/head';
-import React from 'react'
 import Header from '../components/Header';
-import styles from '../styles/Home.module.scss';
 
-export default function Home() {
+import styles from '../styles/Home.module.scss';
+import CardVeicle from '../components/CardVeicle';
+
+export default function Home({ veicles }) {
   return (
      <>
       <Head>
-        <title>Corelab - Veículo </title>
+        <title>Corelab</title>
       </Head>
 
       <Header />
 
-      <div className={styles.container}>
-        <h1>HOME VISITANTES Veículo </h1>
-      </div>
+      <h1 className={styles.title}>Todos os anúncios</h1>
+
+      <CardVeicle
+        veicles={veicles}
+      />
     </>
   )
 }

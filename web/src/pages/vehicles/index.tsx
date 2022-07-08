@@ -31,7 +31,7 @@ export default function Vehicles({ veicles }: VeichlesProps) {
   return (
     <>
       <Head>
-        <title>Corelab - Usuário</title>
+        <title>Corelab - Dashboard</title>
       </Head>
 
       <Header />
