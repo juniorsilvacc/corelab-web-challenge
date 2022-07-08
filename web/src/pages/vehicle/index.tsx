@@ -1,41 +1,52 @@
-import React, { FormEvent, useState } from 'react'
-import { toast } from 'react-toastify';
-import Head from 'next/head';
+import React, { FormEvent, useState } from "react";
+import { toast } from "react-toastify";
+import Head from "next/head";
 
 // Components
-import Header from '../../components/Header'
-import styles from './styles.module.scss';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
-import Textarea from '../../components/Textarea';
+import Header from "../../components/Header";
+import styles from "./styles.module.scss";
+import Input from "../../components/Input";
+import Button from "../../components/Button";
+import Textarea from "../../components/Textarea";
 
-import {api} from '../../services/api'
-import { SSRAuth } from '../../utils/SSRAuth';
+import { api } from "../../services/api";
+import { SSRAuth } from "../../utils/SSRAuth";
 
 export default function Vehicle() {
-  const [name, setName] = useState('')
-  const [plate, setPlate] = useState('')
-  const [color, setColor] = useState('')
-  const [year, setYear] = useState('')
-  const [price, setPrice] = useState('')
-  const [description, setDescription] = useState('')
+  const [name, setName] = useState("");
+  const [plate, setPlate] = useState("");
+  const [color, setColor] = useState("");
+  const [year, setYear] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
 
   const [loading, setLoading] = useState(false);
 
   async function handleCreateVehicle(e: FormEvent) {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
-
-      if (name === '' || plate === '' || color === '' || year === '' || price === '' || description === '') {
+      if (
+        name === "" ||
+        plate === "" ||
+        color === "" ||
+        year === "" ||
+        price === "" ||
+        description === ""
+      ) {
         return toast.warning("Preencha todos os campos");
       }
 
       setLoading(true);
 
       await api.post("/api/vehicles/create", {
-        name, plate, color, year, price, description
-      })
+        name,
+        plate,
+        color,
+        year,
+        price,
+        description,
+      });
 
       toast.success("Veículo cadastrado");
 
@@ -45,12 +56,12 @@ export default function Vehicle() {
       setLoading(false);
     }
 
-    setName('')
-    setPlate('')
-    setColor('')
-    setYear('')
-    setPrice('')
-    setDescription('')
+    setName("");
+    setPlate("");
+    setColor("");
+    setYear("");
+    setPrice("");
+    setDescription("");
   }
 
   return (
@@ -107,21 +118,18 @@ export default function Vehicle() {
               onChange={(e) => setDescription(e.target.value)}
             />
 
-            <Button
-              type="submit"
-              Loading={loading}
-            >
+            <Button type="submit" Loading={loading}>
               Cadastrar
             </Button>
           </form>
         </div>
       </main>
     </>
-  )
+  );
 }
 
 export const getServerSideProps = SSRAuth(async (ctx) => {
   return {
-    props: {}
-  }
-})
+    props: {},
+  };
+});

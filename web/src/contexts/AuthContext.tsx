@@ -1,10 +1,10 @@
-import { createContext, ReactNode, useEffect, useState } from 'react'
-import { destroyCookie, setCookie, parseCookies } from 'nookies'
-import Router from 'next/router'
+import { createContext, ReactNode, useEffect, useState } from "react";
+import { destroyCookie, setCookie, parseCookies } from "nookies";
+import Router from "next/router";
 
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
-import {api} from '../services/api'
+import { api } from "../services/api";
 
 type AuthContextData = {
   user: UserProps | undefined;
@@ -12,45 +12,44 @@ type AuthContextData = {
   signIn: (credentials: SignInProps) => Promise<void>;
   signUp: (credentials: SignUpProps) => Promise<void>;
   signOut: () => void;
-}
+};
 
 type UserProps = {
   id: string;
   name: string;
   email: string;
-}
+};
 
 type SignInProps = {
   email: string;
   password: string;
-}
+};
 
 type SignUpProps = {
   name: string;
   email: string;
   password: string;
-}
+};
 
 type AuthProviderProps = {
   children: ReactNode;
-}
+};
 
-export const AuthContext = createContext({} as AuthContextData)
+export const AuthContext = createContext({} as AuthContextData);
 
 // Função logout
 export function signOut() {
   try {
-    destroyCookie(undefined, '@corelab.token')
+    destroyCookie(undefined, "@corelab.token");
 
-    toast.success('Usuário desconectado')
-    Router.push('/')
+    toast.success("Usuário desconectado");
+    Router.push("/");
   } catch (error) {
-    console.log("Error")
+    console.log("Error");
   }
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-
   const [user, setUser] = useState<UserProps>();
   const isAuthenticated = !!user;
 
@@ -59,70 +58,76 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const { "@corelab.token": token } = parseCookies();
 
     if (token) {
-      api.get('/api/users/details').then((response) => {
-        const { id, name, email } = response.data
+      api
+        .get("/api/users/details")
+        .then((response) => {
+          const { id, name, email } = response.data;
 
-        setUser({
-          id, name, email
+          setUser({
+            id,
+            name,
+            email,
+          });
         })
-      }).catch(() => {
-        signOut()
-      })
+        .catch(() => {
+          signOut();
+        });
     }
-  }, [])
-  
-  // Função login
-  async function signIn({email, password}: SignInProps) {
-    try {
+  }, []);
 
-      const response = await api.post('/api/users/login', {
-        email, password
-      })
+  // Função login
+  async function signIn({ email, password }: SignInProps) {
+    try {
+      const response = await api.post("/api/users/login", {
+        email,
+        password,
+      });
 
       const { id, name, token } = response.data;
-      
-      setCookie(undefined, '@corelab.token', token, {
+
+      setCookie(undefined, "@corelab.token", token, {
         maxAge: 60 * 60 * 24 * 30,
-        path: "/"
-      })
+        path: "/",
+      });
 
       setUser({
         id,
         name,
         email,
-      })
+      });
 
       // Passar o token para novas requisições
-      api.defaults.headers['Authorization'] = `Bearer ${token}`;
+      api.defaults.headers["Authorization"] = `Bearer ${token}`;
 
-      toast.success('Usuário autenticado')
+      toast.success("Usuário autenticado");
 
-      Router.push("/vehicles")
-      
+      Router.push("/vehicles");
     } catch (error) {
-      toast.error(error.response.data.message)
+      toast.error(error.response.data.message);
     }
   }
 
-  async function signUp({name, email, password}: SignUpProps) {
+  async function signUp({ name, email, password }: SignUpProps) {
     try {
+      await api.post("/api/users/register", {
+        name,
+        email,
+        password,
+      });
 
-      await api.post('/api/users/register', {
-        name, email, password
-      })
+      toast.success("Conta criada");
 
-      toast.success('Conta criada')
-
-      Router.push("/")
+      Router.push("/");
     } catch (error) {
-      toast.error(error.response.data.message)
+      toast.error(error.response.data.message);
     }
   }
 
   return (
-    <AuthContext.Provider value={{user, isAuthenticated, signIn, signUp, signOut}}>
+    <AuthContext.Provider
+      value={{ user, isAuthenticated, signIn, signUp, signOut }}
+    >
       {children}
     </AuthContext.Provider>
-  )
+  );
 }
-

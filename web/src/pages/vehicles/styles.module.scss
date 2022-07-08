@@ -36,8 +36,14 @@
       justify-content: center;
       width: 30px;
       height: 30px;
-      border: 1px solid var(--black);
+      border: 1px solid #4F4F4F;
+      border-radius: 2px;
       background-color: var(--white);
+    }
+
+    .button {
+      background-color: transparent;
+      border: 0;
     }
   }
 

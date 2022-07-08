@@ -1,42 +1,42 @@
-import { FormEvent, useContext, useState } from 'react'
-import { AuthContext } from '../../contexts/AuthContext'
-import { toast } from 'react-toastify';
-import Head from 'next/head'
-import styles from '../signin/styles.module.scss'
+import { FormEvent, useContext, useState } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
+import { toast } from "react-toastify";
+import Head from "next/head";
+import styles from "../signin/styles.module.scss";
 
 // Components
-import Button from '../../components/Button'
-import Input from '../../components/Input'
+import Button from "../../components/Button";
+import Input from "../../components/Input";
 
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Signup() {
-  const { signUp } = useContext(AuthContext)
+  const { signUp } = useContext(AuthContext);
 
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   async function handleSignup(e: FormEvent) {
-    e.preventDefault()
+    e.preventDefault();
 
-    if (name === '' || email === '' || password === '') {
-      return toast.warning("Preencha todos os campos")
+    if (name === "" || email === "" || password === "") {
+      return toast.warning("Preencha todos os campos");
     }
 
-    setLoading(true)
+    setLoading(true);
 
     let data = {
       name,
       email,
-      password
-    }
+      password,
+    };
 
-    await signUp(data)
+    await signUp(data);
 
-    setLoading(false)
+    setLoading(false);
   }
 
   return (
@@ -46,8 +46,6 @@ export default function Signup() {
       </Head>
 
       <div className={styles.container}>
-        
-
         <div className={styles.login}>
           <h1>Cadastre-se</h1>
 
@@ -66,24 +64,26 @@ export default function Signup() {
               onChange={(e) => setEmail(e.target.value)}
             />
 
-             <Input
+            <Input
               placeholder="Digite sua senha"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            <Button
-              type="submit"
-              Loading={loading}
-            >
+            <Button type="submit" Loading={loading}>
               Cadastrar
             </Button>
           </form>
 
-          <p>Já tem conta? <Link href="/signin"><a>Acessar</a></Link></p>
+          <p>
+            Já tem conta?{" "}
+            <Link href="/signin">
+              <a>Acessar</a>
+            </Link>
+          </p>
         </div>
       </div>
     </>
-  )
+  );
 }

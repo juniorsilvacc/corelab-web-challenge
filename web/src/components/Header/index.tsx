@@ -1,19 +1,19 @@
-import React, { FormEvent, useContext } from 'react'
-import styles from './styles.module.scss'
-import Link from 'next/link'
+import React, { FormEvent, useContext } from "react";
+import styles from "./styles.module.scss";
+import Link from "next/link";
 import { BiSearchAlt2 } from "react-icons/bi";
-import { FiLogOut } from 'react-icons/fi';
+import { FiLogOut } from "react-icons/fi";
 
-import {AuthContext} from '../../contexts/AuthContext'
+import { AuthContext } from "../../contexts/AuthContext";
 
 export default function Header() {
-  const { signOut, isAuthenticated } = useContext(AuthContext)
-  
+  const { signOut, isAuthenticated } = useContext(AuthContext);
+
   function handleClick() {
-    signOut()
+    signOut();
     location.reload();
   }
-  
+
   return (
     <header className={styles.container}>
       <div className={styles.header}>
@@ -21,40 +21,34 @@ export default function Header() {
           <input type="text" />
 
           <button type="submit">
-            <BiSearchAlt2/>
+            <BiSearchAlt2 />
           </button>
         </form>
 
         {isAuthenticated ? (
           <>
             <nav>
-              <Link href="/vehicles">
-                Meus Veículos
-              </Link>
+              <Link href="/">Home</Link>
 
-              <Link href="/vehicle">
-                Cadastrar Veículo
-              </Link>
+              <Link href="/vehicles">Meus Veículos</Link>
+
+              <Link href="/vehicle">Cadastrar Veículo</Link>
 
               <button onClick={handleClick}>
-                <FiLogOut/>
+                <FiLogOut />
               </button>
             </nav>
           </>
         ) : (
-          <>        
+          <>
             <nav>
-              <Link href="/signin">
-                Entrar
-              </Link>
+              <Link href="/signin">Entrar</Link>
 
-              <Link href="/signup">
-                Cadastrar
-              </Link>
+              <Link href="/signup">Cadastrar</Link>
             </nav>
           </>
         )}
       </div>
     </header>
-  )
+  );
 }

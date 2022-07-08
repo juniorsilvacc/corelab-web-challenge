@@ -1,12 +1,12 @@
-import Head from 'next/head';
-import Header from '../components/Header';
+import Head from "next/head";
+import Header from "../components/Header";
 
-import styles from '../styles/Home.module.scss';
-import CardVehicle from '../components/CardVehicle';
+import styles from "../styles/Home.module.scss";
+import CardVehicle from "../components/CardVehicle";
 
 export default function Home({ veicles }) {
   return (
-     <>
+    <>
       <Head>
         <title>Corelab</title>
       </Head>
@@ -15,9 +15,7 @@ export default function Home({ veicles }) {
 
       <h1 className={styles.title}>Todos os anúncios</h1>
 
-      <CardVehicle
-        veicles={veicles}
-      />
+      <CardVehicle veicles={veicles} />
     </>
-  )
+  );
 }
