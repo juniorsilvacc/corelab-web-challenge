@@ -11,7 +11,7 @@ export default function Header() {
   
   function handleClick() {
     signOut()
-    // location.reload();
+    location.reload();
   }
   
   return (
@@ -42,7 +42,7 @@ export default function Header() {
             </nav>
           </>
         ) : (
-          <>
+          <>        
             <nav>
               <Link href="/signin">
                 Entrar
