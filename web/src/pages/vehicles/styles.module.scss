@@ -2,13 +2,12 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 2rem;
+  padding: 1rem;
   max-width: 1080px;
   margin: 0 auto;
 
   div{
     width: 30%;
-    margin-bottom: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -26,6 +25,21 @@
 
 .card {
   box-shadow: 5px 5px 15px 5px rgb(44 44 44 / 10%);
+  margin-bottom: 2rem;
+
+  .config{
+    padding: 0rem 0 1.5rem 0;
+
+    button{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--black);
+      background-color: var(--white);
+    }
+  }
 
   span{
     margin-bottom: .5rem;

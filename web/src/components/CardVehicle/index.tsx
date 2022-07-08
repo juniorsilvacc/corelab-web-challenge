@@ -3,7 +3,7 @@ import styles from '../../pages/vehicles/styles.module.scss'
 
 import {api} from '../../services/api'
 
-type ListVeiclesProps = {
+export type ListVeiclesProps = {
   id: string;
 	name: string
 	user_id: string;
@@ -15,11 +15,11 @@ type ListVeiclesProps = {
   price: number;
 }
 
-interface VeichlesProps{
+export interface VeichlesProps{
   veicles: ListVeiclesProps[];
 }
 
-export default function CardVeicle({ veicles }: VeichlesProps) {
+export default function CardVehicle({ veicles }: VeichlesProps) {
   const [veichlesList, setVeichlesList] = useState(veicles || [])
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function CardVeicle({ veicles }: VeichlesProps) {
   return (
     <div className={styles.container}>
       {veichlesList.map((item) => (
-        <div key={item.id} className={styles.card}>
+        <div key={item.id} style={{background: item.color}} className={styles.card}>
           <span>{ item.name }</span>
           <p>Preço: { item.price }</p>
           <p>Descrição: { item.description }</p>

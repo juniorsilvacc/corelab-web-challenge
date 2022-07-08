@@ -3,30 +3,28 @@ import Head from 'next/head'
 import { SSRAuth } from '../../utils/SSRAuth'
 
 import styles from './styles.module.scss'
+import { FiX } from 'react-icons/fi';
 
 // Components
 import Header from '../../components/Header'
+import { VeichlesProps } from '../../components/CardVehicle';
 
+//Api
 import { apiConfig } from '../../services/apiConfig'
-
-type ListVeiclesProps = {
-  id: string;
-	name: string
-	user_id: string;
-  description: string;
-	plate: string
-	isFavorite: boolean;
-	year: number
-  color: string;
-  price: number;
-}
-
-interface VeichlesProps{
-  veicles: ListVeiclesProps[];
-}
+import { api } from '../../services/api';
+import { toast } from 'react-toastify';
 
 export default function Vehicles({ veicles }: VeichlesProps) {
   const [veichlesList, setVeichlesList] = useState(veicles || [])
+
+  async function handleRemove(id: string) {
+    await api.delete(`/api/vehicles/remove/${id}`)
+
+    toast.success("Veículo excluido");
+
+    const response = await api.get("/api/vehicles/get")
+    setVeichlesList(response.data)
+  }
 
   return (
     <>
@@ -41,7 +39,12 @@ export default function Vehicles({ veicles }: VeichlesProps) {
       <div className={styles.container}>
         
         {veichlesList.map((item) => (
-          <div key={item.id} className={styles.card}>
+          <div key={item.id} style={{background: item.color}} className={styles.card}>
+            <div className={styles.config}>
+              <button onClick={() => handleRemove(item.id)}>
+                <FiX size={22} color='#EA1D2C' />
+              </button>
+            </div>
             <span>{ item.name }</span>
             <p>Preço: { item.price }</p>
             <p>Descrição: { item.description }</p>

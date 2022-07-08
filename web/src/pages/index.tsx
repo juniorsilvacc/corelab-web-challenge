@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Header from '../components/Header';
 
 import styles from '../styles/Home.module.scss';
-import CardVeicle from '../components/CardVeicle';
+import CardVehicle from '../components/CardVehicle';
 
 export default function Home({ veicles }) {
   return (
@@ -15,7 +15,7 @@ export default function Home({ veicles }) {
 
       <h1 className={styles.title}>Todos os anúncios</h1>
 
-      <CardVeicle
+      <CardVehicle
         veicles={veicles}
       />
     </>
