@@ -83,7 +83,7 @@ export default function CardVehicle({ veicles }: VeichlesProps) {
                   onClick={() => handleFavorite(item.id)}
                   className={styles.button}
                 >
-                  <FaRegHeart size={22} color="#FFFFFF" />
+                  <FaRegHeart size={25} color="#FFFFFF" />
                 </button>
               </>
             )}

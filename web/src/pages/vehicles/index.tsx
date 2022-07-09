@@ -3,7 +3,7 @@ import Head from "next/head";
 import { SSRAuth } from "../../utils/SSRAuth";
 
 import styles from "./styles.module.scss";
-import { FiX } from "react-icons/fi";
+import { FiTrash2, FiEdit } from "react-icons/fi";
 
 // Components
 import Header from "../../components/Header";
@@ -13,6 +13,8 @@ import { VeichlesProps } from "../../components/CardVehicle";
 import { apiConfig } from "../../services/apiConfig";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
+
+import Link from "next/link";
 
 export default function Vehicles({ veicles }: VeichlesProps) {
   const [veichlesList, setVeichlesList] = useState(veicles || []);
@@ -45,8 +47,13 @@ export default function Vehicles({ veicles }: VeichlesProps) {
           >
             <div className={styles.config}>
               <button onClick={() => handleRemove(item.id)}>
-                <FiX size={22} color="#EA1D2C" />
+                <FiTrash2 size={20} color="#da1a29" />
               </button>
+              <Link href={`/update/${item.id}`}>
+                <button>
+                  <FiEdit size={20} color="#f9d423" />
+                </button>
+              </Link>
             </div>
             <span>{item.name}</span>
             <p>Preço: {item.price}</p>
