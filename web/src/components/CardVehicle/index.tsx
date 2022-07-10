@@ -20,11 +20,11 @@ export type ListVeiclesProps = {
   price: number;
 };
 
-export interface VeichlesProps {
+export interface IVeichlesProps {
   veicles: ListVeiclesProps[];
 }
 
-export default function CardVehicle({ veicles }: VeichlesProps) {
+export default function CardVehicle({ veicles }: IVeichlesProps) {
   const [veichlesList, setVeichlesList] = useState(veicles || []);
 
   useEffect(() => {
@@ -34,29 +34,21 @@ export default function CardVehicle({ veicles }: VeichlesProps) {
   }, []);
 
   async function handleFavorite(id: string) {
-    try {
-      await api.put(`/api/vehicles/favorite/${id}`);
+    await api.put(`/api/vehicles/favorite/${id}`);
 
-      toast.success("Gostou");
+    toast.success("Gostou");
 
-      const response = await api.get("/api/vehicles/all");
-      setVeichlesList(response.data);
-    } catch (error) {
-      console.log("Não foi possível executar essa ação");
-    }
+    const response = await api.get("/api/vehicles/all");
+    setVeichlesList(response.data);
   }
 
   async function handleNoFavorite(id: string) {
-    try {
-      await api.put(`/api/vehicles/nofavorite/${id}`);
+    await api.put(`/api/vehicles/nofavorite/${id}`);
 
-      toast.success("Removido de favoritos");
+    toast.success("Removido de favoritos");
 
-      const response = await api.get("/api/vehicles/all");
-      setVeichlesList(response.data);
-    } catch (error) {
-      console.log("Não foi possível executar essa ação");
-    }
+    const response = await api.get("/api/vehicles/all");
+    setVeichlesList(response.data);
   }
 
   return (

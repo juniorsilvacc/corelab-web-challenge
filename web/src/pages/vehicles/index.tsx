@@ -7,7 +7,7 @@ import { FiTrash2, FiEdit } from "react-icons/fi";
 
 // Components
 import Header from "../../components/Header";
-import { VeichlesProps } from "../../components/CardVehicle";
+import { IVeichlesProps } from "../../components/CardVehicle";
 
 //Api
 import { apiConfig } from "../../services/apiConfig";
@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 
 import Link from "next/link";
 
-export default function Vehicles({ veicles }: VeichlesProps) {
+export default function Vehicles({ veicles }: IVeichlesProps) {
   const [veichlesList, setVeichlesList] = useState(veicles || []);
 
   async function handleRemove(id: string) {

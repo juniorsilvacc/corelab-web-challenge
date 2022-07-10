@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React, { FormEvent, useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { SSRAuth } from "../../utils/SSRAuth";
 import { toast } from "react-toastify";
 
@@ -25,14 +25,14 @@ type VeiclesProps = {
   description: string;
 };
 
-interface VehicleProps {
+interface IVehicleProps {
   vehicleData: VeiclesProps | any;
 }
 
-export default function Update({ vehicleData }: VehicleProps) {
+export default function Update({ vehicleData }: IVehicleProps) {
   const [vehicle, setVehicle] = useState(vehicleData || {});
 
-  function handleChange(e) {
+  function handleChange(e: any) {
     setVehicle({ ...vehicle, [e.target.name]: e.target.value });
   }
 
@@ -50,21 +50,16 @@ export default function Update({ vehicleData }: VehicleProps) {
   async function handleUpdate(e: FormEvent) {
     e.preventDefault();
 
-    try {
-      setLoading(true);
+    setLoading(true);
 
-      const response = await api.patch(`/api/vehicles/update/${id}`, {
-        params: {},
-      });
+    await api.patch(`/api/vehicles/update/${id}`, {
+      ...vehicle,
+    });
 
-      toast.success("Veículo atualizado");
+    toast.success("Veículo atualizado");
 
-      setVehicle(response.data);
-      setLoading(false);
-    } catch (error) {
-      toast.error(error.response.data.message);
-      setLoading(false);
-    }
+    setLoading(false);
+    Router.push("/vehicles");
   }
 
   return (
@@ -92,6 +87,7 @@ export default function Update({ vehicleData }: VehicleProps) {
             <Input
               placeholder="Placa"
               type="text"
+              id="plate"
               name="plate"
               value={vehicle.plate || ""}
               onChange={handleChange}
@@ -100,6 +96,7 @@ export default function Update({ vehicleData }: VehicleProps) {
             <Input
               placeholder="Cor"
               type="text"
+              id="color"
               name="color"
               value={vehicle.color || ""}
               onChange={handleChange}
@@ -108,6 +105,7 @@ export default function Update({ vehicleData }: VehicleProps) {
             <Input
               placeholder="Ano"
               type="number"
+              id="year"
               name="year"
               value={vehicle.year || ""}
               onChange={handleChange}
@@ -116,6 +114,7 @@ export default function Update({ vehicleData }: VehicleProps) {
             <Input
               placeholder="Preço"
               type="number"
+              id="price"
               name="price"
               value={vehicle.price || ""}
               onChange={handleChange}
@@ -123,6 +122,7 @@ export default function Update({ vehicleData }: VehicleProps) {
 
             <Textarea
               placeholder="Descrição"
+              id="description"
               name="description"
               value={vehicle.description || ""}
               onChange={handleChange}

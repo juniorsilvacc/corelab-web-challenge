@@ -25,36 +25,31 @@ export default function Vehicle() {
   async function handleCreateVehicle(e: FormEvent) {
     e.preventDefault();
 
-    try {
-      if (
-        name === "" ||
-        plate === "" ||
-        color === "" ||
-        year === "" ||
-        price === "" ||
-        description === ""
-      ) {
-        return toast.warning("Preencha todos os campos");
-      }
-
-      setLoading(true);
-
-      await api.post("/api/vehicles/create", {
-        name,
-        plate,
-        color,
-        year,
-        price,
-        description,
-      });
-
-      toast.success("Veículo cadastrado");
-
-      setLoading(false);
-    } catch (error) {
-      toast.error(error.response.data.message);
-      setLoading(false);
+    if (
+      name === "" ||
+      plate === "" ||
+      color === "" ||
+      year === "" ||
+      price === "" ||
+      description === ""
+    ) {
+      return toast.warning("Preencha todos os campos");
     }
+
+    setLoading(true);
+
+    await api.post("/api/vehicles/create", {
+      name,
+      plate,
+      color,
+      year,
+      price,
+      description,
+    });
+
+    toast.success("Veículo cadastrado");
+
+    setLoading(false);
 
     setName("");
     setPlate("");
