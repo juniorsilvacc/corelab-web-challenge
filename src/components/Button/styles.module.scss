@@ -1,0 +1,28 @@
+.button{
+  max-width: 600px;
+  background: linear-gradient(135deg, #8844ee, #b07dfb);
+  padding: .6rem;
+  border: 0;
+  border-radius: .2rem;
+  color: var(--white);
+  transition: filter 300ms;
+
+  &[disabled]{
+    cursor: not-allowed;
+    svg{
+      animation: animate 2s infinite;
+    }
+  }
+
+  &:hover{
+    filter: brightness(1.05);
+  }
+}
+
+@keyframes animate{
+  from{
+    transform: rotate(0deg);
+  } to {
+    transform: rotate(360deg);
+  }
+}

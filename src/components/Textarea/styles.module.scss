@@ -1,0 +1,18 @@
+.texarea{
+  border: 1px solid var(--border-input);
+  display: block;
+  font-size: 1rem;
+  padding: 0.8rem;
+  border-radius: 0.4rem;
+  background-color: var(--background-input);
+  margin-bottom: 1rem;
+  resize: none;
+  min-height: 120px;
+}
+
+@media(max-width: 700px) {
+  .texarea {
+    border: none;
+    background-color: var(--background-input-mob);
+  }
+}
