@@ -1,75 +1,34 @@
-## Corelab Challenge
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-Welcome to the **Corelab Challenge**! Here you'll show us how awesome you are at coding.
-In order to do that, we've prepared two repositories which you will fork and program.
+## Getting Started
 
-### The Challenge
+First, run the development server:
 
-You will create a web app which will consume an API to manage the CRUD of **vehicles**.
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-The frontend repository is this: https://github.com/corelabbr/corelab-web-challenge
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-If you feel more comfortable, you can pick another React framework and show us your skills.
+You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-The backend repository is this: https://github.com/corelabbr/corelab-api-challenge
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-If you feel more comfortable, you can pick another Node JS framework and show us your skills.
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-Try to show us all the skills you have, the more you do and care about the code, the more we get impressed. That's your **CHANCE**.
+## Learn More
 
-### Mobile Layout
-The Mobile Layout can be found here: https://shorturl.ae/NTyff
-### Desktop Layout
-The Desktop Layout can be found here: https://shorturl.ae/xEIEo
+To learn more about Next.js, take a look at the following resources:
 
-### Backend
-Repository: 
-1. Node: ^16.15.0
-2. NPM: ^8.5.5
-3. Framework: Adonis TS or any other node framework you know.
-4. Database: Choose your own, you can even save in memory.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Frontend
-Repository: 
-1. Node: ^16.15.0
-2. NPM: ^8.5.5
-3. Framework: React TS
-4. Sass or other preprocessor
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-### The Required Features
-1. On clicking on an "Add new vehicle" button, a new form opens up to create a vehicle.
-2. On submitting the form, it needs to save the new vehicle.
-3. On typing at the search input, it should filter the vehicles comparing to any of the vehicles property. E.g.: it should compare the searched term to either name, or description, or price, or any other field in the vehicle.
-4. On clicking on a heart icon, it should favorite the vehicle.
-5. On clicking on an edit icon, it should open the form again to update the selected vehicle.
-6. On clicking on an delete icon, it should remove the vehicle.
-7. On clicking on the filter icon, it should open the filters form, and when the filters are selected, it should filter the vehicles based on those values.
+## Deploy on Vercel
 
-### What are we assessing
-1. Code Quality
-2. Code Format
-3. Code Perfomance
-4. Frontend Design
-5. If your code is Easily Readable
-6. Mobile First approach
-7. Code Responsability
-8. Features Work
-9. Responsiveness
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-### Want to impress us even more?
-If you feel comfortable and want to impress us even more, you can do the following:
-
-1. Work on correct types and interfaces
-2. Work on eslint rules
-3. Work prettier config
-4. Work on docker containers
-5. Work on tests
-6. Work on CI/CD
-
-### What to do when you finish?
-
-Create a file PULL_REQUEST.md where you will describe what you did and how in as much detail as possible. Feel free to add videos for better explanation.
-
-Create a new pull request using the same branch name for Backend and Frontend
-
-Send us the pull requests and that's all!
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
