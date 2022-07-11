@@ -10,11 +10,9 @@ export default function Home({ veicles }) {
       <Head>
         <title>Corelab</title>
       </Head>
-
       <Header />
 
       <h1 className={styles.title}>Todos os anúncios</h1>
-
       <CardVehicle veicles={veicles} />
     </>
   );

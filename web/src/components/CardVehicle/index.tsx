@@ -45,8 +45,6 @@ export default function CardVehicle({ veicles }: IVeichlesProps) {
   async function handleNoFavorite(id: string) {
     await api.put(`/api/vehicles/nofavorite/${id}`);
 
-    toast.success("Removido de favoritos");
-
     const response = await api.get("/api/vehicles/all");
     setVeichlesList(response.data);
   }
